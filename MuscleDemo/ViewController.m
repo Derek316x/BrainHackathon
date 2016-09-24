@@ -10,6 +10,8 @@
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kEMG_THRESHOLD 150
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -32,6 +34,8 @@
     [self.serialPort open];
     
     self.dataBuffer = [NSMutableArray arrayWithCapacity:50];
+    
+    self.KPE = [[KeyPressEmulator alloc] init];
 }
 
 - (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data
@@ -43,30 +47,28 @@
     for (int i = 0; i<[data length]; i++) {
         char byte = byteArray[i];
         if (isdigit(byte)){
-            //NSLog(@"%c",byte);
             NSString *s = [[NSString alloc] initWithCString:&byte encoding:NSUTF8StringEncoding];
             myString = [myString stringByAppendingString:s];
         }
     }
-    NSLog(@"%@",myString);
-    NSString *newString = [[myString componentsSeparatedByCharactersInSet:
-                            [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
-                           componentsJoinedByString:@""];
-    NSInteger val = [newString integerValue];
-    NSLog(@"%ld", (long)val);
-    NSLog(@"----");
+    NSLog(@"%ld",(long)[self sanitizeIntegerString:myString]);
     
-    if (val > 150) {
+    if ([self sanitizeIntegerString:myString] > kEMG_THRESHOLD) {
         [self pressSpace];
     }
-    
 }
 
 - (void) pressSpace
 {
-    CGEventPost(kCGHIDEventTap, CGEventCreateKeyboardEvent(NULL, 0x31, true));
-    usleep(20);
-    CGEventPost(kCGHIDEventTap, CGEventCreateKeyboardEvent(NULL, 0x31, false));
+    [self.KPE keyTap:' '];
+}
+
+- (NSInteger) sanitizeIntegerString:(NSString *)string
+{
+    NSString *newString = [[string componentsSeparatedByCharactersInSet:
+                            [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                           componentsJoinedByString:@""];
+    return [newString integerValue];
 }
 
 
