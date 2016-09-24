@@ -8,6 +8,7 @@
 
 
 #import "ViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ViewController
 
@@ -48,6 +49,24 @@
         }
     }
     NSLog(@"%@",myString);
+    NSString *newString = [[myString componentsSeparatedByCharactersInSet:
+                            [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                           componentsJoinedByString:@""];
+    NSInteger val = [newString integerValue];
+    NSLog(@"%ld", (long)val);
+    NSLog(@"----");
+    
+    if (val > 150) {
+        [self pressSpace];
+    }
+    
+}
+
+- (void) pressSpace
+{
+    CGEventPost(kCGHIDEventTap, CGEventCreateKeyboardEvent(NULL, 0x31, true));
+    usleep(20);
+    CGEventPost(kCGHIDEventTap, CGEventCreateKeyboardEvent(NULL, 0x31, false));
 }
 
 
