@@ -7,6 +7,7 @@
 //
 
 #import "KeyPressEmulator.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation KeyPressEmulator
 

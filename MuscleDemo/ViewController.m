@@ -8,8 +8,8 @@
 
 
 #import "ViewController.h"
-#import <QuartzCore/QuartzCore.h>
 
+//EMG Spiker Shield
 #define kEMG_THRESHOLD 150
 
 @implementation ViewController
@@ -28,13 +28,14 @@
 }
 
 - (void) setup {
-    self.serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.usbmodem1411"];
+    //EMG
+    self.serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.usbmodem1411"]; //left port on macbook
     self.serialPort.baudRate = @9600;
     self.serialPort.delegate = self;
     [self.serialPort open];
-    
     self.dataBuffer = [NSMutableArray arrayWithCapacity:50];
-    
+
+    //emulated input
     self.KPE = [[KeyPressEmulator alloc] init];
 }
 
@@ -54,13 +55,8 @@
     NSLog(@"%ld",(long)[self sanitizeIntegerString:myString]);
     
     if ([self sanitizeIntegerString:myString] > kEMG_THRESHOLD) {
-        [self pressSpace];
+       // [self pressSpace];
     }
-}
-
-- (void) pressSpace
-{
-    [self.KPE keyTap:' '];
 }
 
 - (NSInteger) sanitizeIntegerString:(NSString *)string
@@ -69,6 +65,13 @@
                             [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                            componentsJoinedByString:@""];
     return [newString integerValue];
+}
+
+#pragma mark - debug
+
+- (void) pressSpace
+{
+    [self.KPE keyTap:' '];
 }
 
 

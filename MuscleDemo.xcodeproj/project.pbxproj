@@ -13,6 +13,7 @@
 		693D1A5A1D96FD7C00932B58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693D1A591D96FD7C00932B58 /* Assets.xcassets */; };
 		693D1A5D1D96FD7C00932B58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693D1A5B1D96FD7C00932B58 /* Main.storyboard */; };
 		699FB2631D97253F002A9072 /* KeyPressEmulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 699FB2621D97253F002A9072 /* KeyPressEmulator.m */; };
+		699FB2671D9737EA002A9072 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699FB2661D9737EA002A9072 /* CoreBluetooth.framework */; };
 		EE1E5432CB50F499F68B4ED5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 558D3D279DF0E335CA3F2345 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		693D1A5E1D96FD7C00932B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		699FB2611D97253F002A9072 /* KeyPressEmulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyPressEmulator.h; sourceTree = "<group>"; };
 		699FB2621D97253F002A9072 /* KeyPressEmulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyPressEmulator.m; sourceTree = "<group>"; };
+		699FB2661D9737EA002A9072 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreBluetooth.framework; sourceTree = "<group>"; };
 		7E693CB3747C64A8E0CFBB49 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,6 +41,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE1E5432CB50F499F68B4ED5 /* libPods.a in Frameworks */,
+				699FB2671D9737EA002A9072 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +51,7 @@
 		693D1A441D96FD7C00932B58 = {
 			isa = PBXGroup;
 			children = (
+				699FB2661D9737EA002A9072 /* CoreBluetooth.framework */,
 				693D1A4F1D96FD7C00932B58 /* MuscleDemo */,
 				693D1A4E1D96FD7C00932B58 /* Products */,
 				CD2B2155AA2C84999927BC3B /* Pods */,
@@ -333,6 +337,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MuscleDemo",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MuscleDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.Derek316x.MuscleDemo;
@@ -346,6 +355,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MuscleDemo",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MuscleDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.Derek316x.MuscleDemo;
